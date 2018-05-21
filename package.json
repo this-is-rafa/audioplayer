@@ -1,0 +1,17 @@
+{
+  "name": "audioplayer",
+  "version": "1.0.0",
+  "description": "Audio Player",
+  "main": "audioPlayer.js",
+  "dependencies": {},
+  "devDependencies": {
+    "babel-preset-env": "^1.7.0",
+    "gulp": "^3.9.1",
+    "gulp-babel": "^7.0.1"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Rafa",
+  "license": "MIT"
+}
