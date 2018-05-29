@@ -58,6 +58,7 @@ class AudioPlayer {
 
     this.audio.addEventListener('durationchange', () => this.duration = this.audio.duration, false);
     this.audio.addEventListener('timeupdate', this.timeUpdate, false);
+    this.audio.addEventListener('ended', this.nextTrack);
     this.timeDot.addEventListener('mousedown', this.mouseDown, false);
     this.timeDot.addEventListener('touchstart', this.mouseDown, false);
     window.addEventListener('mouseup', this.mouseUp, false);
