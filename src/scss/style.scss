@@ -1,0 +1,204 @@
+@import 'mixins'; 
+
+$breakpoints: (
+  "phone":        320px,
+  "tablet":       768px,
+  "tablet-wide":  1024px,
+  "desktop":      1200px,
+  "desktop-md":   1440px,
+  "desktop-lg":   1600px,
+  "desktop-xl":   1920px,
+);
+
+$z-index: (
+  "audio-player": 10,
+  "ap-progress-bar__dot": 15
+);
+
+$text-color: #333;
+$accent: #ccc;
+$primary: #0066cc;
+$white: #fff;
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: sans-serif;
+  color: $text-color;
+}
+
+h1,h2,h3,h4,h5,h6 {
+  margin: 0 0 1rem;
+}
+
+.ap-top {
+  border-bottom: 1px solid $accent;
+  padding: 1rem;
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: z('audio-player');
+
+  @include mq('tablet') {
+    display: none;
+  }
+
+  &__title {
+    font-weight: normal;
+    margin: 0;
+  }
+
+  &__author {
+    font-weight: normal;
+    margin: 0;
+  }
+}
+
+.ap-controls-container {
+  bottom: 0;
+  position: fixed;
+  width: 100%;
+  z-index: z('audio-player');
+
+  @include mq('tablet') {
+    display: flex;
+    justify-content: space-around;
+  }
+
+  &__left {
+    @include mq('tablet') {
+      width: auto;
+    }
+  }
+
+  &__middle {
+    @include mq('tablet') {
+      width: 440px;
+    }
+  }
+
+  &__right {
+    @include mq('tablet') {
+      width: auto;
+    }
+  }
+}
+
+.ap-progress-bar {
+  background-color: $primary;
+  bottom: 70px;
+  height: 4px;
+  position: fixed;
+  width: 100%;
+
+  &__dot {
+    background-color: $primary;
+    border: 0;
+    border-radius: 50%;
+    cursor: pointer;
+    height: 8px;
+    position: absolute;
+    top: -50%;
+    width: 8px;
+    z-index: z('ap-progress-bar__dot');
+
+    &:focus {
+      height: 20px;
+      width: 20px;
+    }
+  }
+
+}
+
+.ap-time {
+  align-items: center;
+  display: flex;
+  font-size: .8rem;
+  height: .85rem;
+  justify-content: space-between;
+  padding: .5rem .5rem 0;
+  position: absolute;
+  width: 100%;
+}
+
+.ap-controls {
+  align-items: center;
+  display: flex;
+  height: 70px;
+  justify-content: center;
+  width: 100%;
+
+  &__btn {
+    background-color: transparent;
+    border: 0;
+    border-radius: 50%;
+    cursor: pointer;
+    margin: 0 .7rem;
+    padding: 0;
+    width: 30px;
+    height: 30px;
+    transition: .3s ease background-color;
+
+    &:active {
+      background-color: $accent;
+    }
+
+    &:focus {
+      outline: none;
+    }
+
+    &::moz-focus-inner {
+      border: 0;
+      outline: 0;
+    }
+
+
+    &--prev {
+
+    }
+  
+    &--playpause {
+      background-color: $primary;
+      height: 50px;
+      width: 50px;
+    }
+  
+    &--next {
+  
+    }
+
+    &--skip-back {
+
+    }
+
+    &--skip-forward {
+
+    }
+  }
+
+}
+
+.ap-icon {
+  fill: $text-color;
+  height: 20px;
+  width: 20px;
+  margin: 0;
+
+  &--skip10 {
+
+  }
+
+  &--advance-prev {
+    transform: rotate(180deg);
+  }
+
+  &--play {
+    fill: $white;
+    height: 35px;
+    margin-left: 2px;
+    width: 35px;
+  }
+}

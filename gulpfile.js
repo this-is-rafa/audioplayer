@@ -35,9 +35,9 @@ gulp.task('html', function () {
 });
 
 gulp.task('js', function () {
-  return gulp.src("./src/audioplayer.js")
+  return gulp.src("./src/js/audioplayer.js")
     .pipe(babel())
-    .pipe(gulp.dest("./dist"));
+    .pipe(gulp.dest("./dist/js"));
 });
 
 gulp.task('default', ['html', 'sassy', 'js']);
