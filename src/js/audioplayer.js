@@ -74,6 +74,12 @@ class AudioPlayer {
     this.nextTrackBtn = document.getElementById(NEXT_TRACK_ID);
     this.skipForwardBtn = document.getElementById(SKIP_FORWARD_ID);
 
+    //Volume
+    this.volumeBar = document.getElementById('ap-volume');
+    this.volumeBar.value = Number( localStorage.getItem('apVolume') ) || 100;
+    this.audio.volume = (this.volumeBar.value / 100) || 1;
+
+
     //Times
     this.timeTextCurrent = document.getElementById('ap-time-current');
     this.timeTextDuration = document.getElementById('ap-time-duration');
@@ -98,6 +104,9 @@ class AudioPlayer {
     this.audio.addEventListener('durationchange', () => this.duration = this.audio.duration, false);
     this.audio.addEventListener('timeupdate', this.timeUpdate, false);
     this.audio.addEventListener('ended', this.nextTrack);
+
+    this.volumeBar.addEventListener('change', this.setVolume, false);
+
     this.timeDot.addEventListener('mousedown', this.mouseDown, false);
     this.timeDot.addEventListener('touchstart', this.mouseDown, false);
     window.addEventListener('mouseup', this.mouseUp, false);
@@ -252,15 +261,9 @@ class AudioPlayer {
     console.log(this.audio.currentTime);
   }
 
-  readTags = () => {
-    jsmediatags.read(AUDIO_FILES[0], {
-      onSuccess: function(tag) {
-        console.log(tag);
-      },
-      onError: function(error) {
-        console.log(':(', error.type, error.info);
-      }
-    });
+  setVolume = () => {
+    this.audio.volume = this.volumeBar.value / 100;
+    localStorage.setItem('apVolume', this.volumeBar.value);
   }
 
   init() {

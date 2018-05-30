@@ -20,6 +20,8 @@ $accent: #ccc;
 $primary: #0066cc;
 $white: #fff;
 
+
+
 * {
   box-sizing: border-box;
 }
@@ -121,17 +123,20 @@ h1,h2,h3,h4,h5,h6 {
 
 .ap-time {
   align-items: center;
+  bottom: 50px;
   display: flex;
   font-size: .8rem;
   height: .85rem;
   justify-content: space-between;
-  padding: .5rem .5rem 0;
+  padding: 0 .5rem;
   position: absolute;
   width: 100%;
 
   @include mq('tablet') {
+    bottom: auto;
     height: auto;
     justify-content: flex-end;
+    padding: .5rem .5rem 0;
     position: relative;
     width: auto;
   }
@@ -249,5 +254,43 @@ h1,h2,h3,h4,h5,h6 {
     height: 35px;
     margin-left: 2px;
     width: 35px;
+  }
+}
+
+$volume-w: 8rem;
+$volume-h: .125rem;
+$volume-dot-d: .8rem;
+
+.ap-volume {
+  &, &::-webkit-slider-thumb {
+      -webkit-appearance: none;
+  }
+  
+  background: transparent;
+  display: none;
+  margin: .5rem auto 0;
+  padding: 0;
+  width: $volume-w; height: $volume-dot-d;
+  
+  &::-webkit-slider-runnable-track {
+      @include track($volume-w, $volume-h, $accent);
+  }
+  &::-moz-range-track { @include track($volume-w, $volume-h, $accent); }
+  &::-ms-track { @include track($volume-w, $volume-h, $accent); }
+  
+  &::-webkit-slider-thumb {
+      margin-top: .5*($volume-h - $volume-dot-d);
+      @include thumb($volume-dot-d, $primary);
+  }
+  &::-moz-range-thumb { @include thumb($volume-dot-d, $primary); }
+  &::-ms-thumb {
+      margin-top: 0;
+      @include thumb($volume-dot-d, $primary);
+  }
+  
+  &::-ms-tooltip { display: none }
+
+  @include mq('tablet') {
+    display: block;
   }
 }

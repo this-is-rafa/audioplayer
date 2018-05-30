@@ -66,3 +66,20 @@
 @function z($key) {
   @return map-get($z-index, $key);
 }
+
+
+//Range Slider
+@mixin track($width, $height, $color) {
+  box-sizing: border-box;
+  border: none;
+  width: $width; height: $height;
+  background: $color;
+}
+
+@mixin thumb($diameter, $color) {
+  box-sizing: border-box;
+  border: none;
+  width: $diameter; height: $diameter;
+  border-radius: 50%;
+  background: $color;
+}
