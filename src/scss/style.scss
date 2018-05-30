@@ -58,7 +58,7 @@ h1,h2,h3,h4,h5,h6 {
 }
 
 .ap-progress-bar {
-  background-color: $primary;
+  background-color: $accent;
   bottom: 70px;
   height: 4px;
   position: fixed;
@@ -79,6 +79,12 @@ h1,h2,h3,h4,h5,h6 {
       height: 20px;
       width: 20px;
     }
+  }
+
+  &__color {
+    background-color: $primary;
+    height: 4px;
+    width: 0;
   }
 
 }

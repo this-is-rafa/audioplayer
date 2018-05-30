@@ -13,8 +13,8 @@ const AUDIO_FILES = [
 
 const SONGS = [
   {
-    title: 'Long VBR',
-    author: 'Ogg Vorbis',
+    title: 'Long VBR No One\'s Listening',
+    author: 'Ogg Vorbis Rat Radio',
     file: 'http://localhost:4500/audio/long-vbr.ogg' 
   },
   {
@@ -82,6 +82,7 @@ class AudioPlayer {
     //Timeline
     this.progressBar = document.getElementById('ap-progress-bar');
     this.timeDot = document.getElementById('ap-progress-bar-dot');
+    this.timeColor = document.getElementById('ap-progress-bar-color');
     this.progressBarWidth = this.progressBar.offsetWidth - this.timeDot.offsetWidth;
     this.onTimeDot = false;
     
@@ -137,6 +138,7 @@ class AudioPlayer {
     const timePercent = this.progressBarWidth * (this.audio.currentTime / this.duration);
 
     this.timeDot.style.left = timePercent + 'px';
+    this.timeColor.style.width = timePercent + 'px';
   }
 
   
@@ -174,12 +176,15 @@ class AudioPlayer {
 
     if (leftPosition >= 0 && leftPosition <= this.progressBarWidth) {
       this.timeDot.style.left = leftPosition + 'px';
+      this.timeColor.style.width = leftPosition + 'px';
     }
     if (leftPosition < 0) {
       this.timeDot.style.left = '0';
+      this.timeColor.style.width = leftPosition + 'px';
     }
     if (leftPosition > this.progressBarWidth) {
       this.timeDot.style.left = this.progressBarWidth + 'px';
+      this.timeColor.style.width = leftPosition + 'px';
     }
   }
 
@@ -194,22 +199,15 @@ class AudioPlayer {
     for (let i = 0; i < this.authorElements.length; i++) {
       this.authorElements[i].innerHTML = track.author || 'Unknown Author';
     }
-
-    // this.titleElements.forEach( (item) => {
-    //   item.innerText = track.title;
-    // });
-    // this.authorElements.forEach( (item) => {
-    //   item.innerText = author.title;
-    // });
   }
 
   playPauseTrack = () => {
     if (this.audio.paused) {
       this.audio.play();
-      this.timeTextDuration.innerHTML = this.formatTime(this.duration);
     } else {
       this.audio.pause();
     }
+    this.timeTextDuration.innerHTML = this.formatTime(this.duration);
   };
 
   setTrack = () => {
@@ -232,6 +230,7 @@ class AudioPlayer {
   prevTrack = () => {
     if (this.currentTrack < 1) {
       this.currentTrack = 0;
+      this.loadTrack(this.trackList[this.currentTrack]);
       this.audio.currentTime = 0;
       this.setTrack();
       return;
