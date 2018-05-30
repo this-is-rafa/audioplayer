@@ -57,36 +57,6 @@ h1,h2,h3,h4,h5,h6 {
   }
 }
 
-.ap-controls-container {
-  bottom: 0;
-  position: fixed;
-  width: 100%;
-  z-index: z('audio-player');
-
-  @include mq('tablet') {
-    display: flex;
-    justify-content: space-around;
-  }
-
-  &__left {
-    @include mq('tablet') {
-      width: auto;
-    }
-  }
-
-  &__middle {
-    @include mq('tablet') {
-      width: 440px;
-    }
-  }
-
-  &__right {
-    @include mq('tablet') {
-      width: auto;
-    }
-  }
-}
-
 .ap-progress-bar {
   background-color: $primary;
   bottom: 70px;
@@ -113,6 +83,36 @@ h1,h2,h3,h4,h5,h6 {
 
 }
 
+.ap-controls-container {
+  bottom: 0;
+  position: fixed;
+  width: 100%;
+  z-index: z('audio-player');
+
+  @include mq('tablet') {
+    display: flex;
+    justify-content: space-around;
+  }
+
+  &__left {
+    @include mq('tablet') {
+      width: 30%;
+    }
+  }
+
+  &__middle {
+    @include mq('tablet') {
+      width: auto;
+    }
+  }
+
+  &__right {
+    @include mq('tablet') {
+      width: 30%;
+    }
+  }
+}
+
 .ap-time {
   align-items: center;
   display: flex;
@@ -122,6 +122,49 @@ h1,h2,h3,h4,h5,h6 {
   padding: .5rem .5rem 0;
   position: absolute;
   width: 100%;
+
+  @include mq('tablet') {
+    height: auto;
+    justify-content: flex-end;
+    position: relative;
+    width: auto;
+  }
+
+  &__text {
+    &--current {
+      margin-right: .3rem;
+
+      @include mq('tablet') {
+        &:after {
+          content: ' / ';
+        }
+      }
+    }
+  }
+}
+
+.ap-bottom-titles {
+  display: none;
+  font-size: 1rem;
+  max-width: 100%;
+  overflow: hidden;
+  white-space: nowrap;
+
+  @include mq('tablet') {
+    display: flex;
+    flex-direction: column;
+    height: 70px;
+    justify-content: center;
+  }
+
+  &__title {
+    font-size: .9rem;
+    font-weight: 600;
+  }
+
+  &__author {
+    font-size: .8rem;
+  }
 }
 
 .ap-controls {

@@ -11,6 +11,39 @@ const AUDIO_FILES = [
   'http://localhost:4500/audio/rr_no_ones_listening_ep102_03_14_18.mp3',
 ];
 
+const SONGS = [
+  {
+    title: 'Long VBR',
+    author: 'Ogg Vorbis',
+    file: 'http://localhost:4500/audio/long-vbr.ogg' 
+  },
+  {
+    title: 'Seconds CBR',
+    author: 'Mpeg Layer 3',
+    file: 'http://localhost:4500/audio/seconds-CBR.mp3' 
+  },
+  {
+    title: 'Seconds VBR',
+    author: 'MP3',
+    file: 'http://localhost:4500/audio/seconds-VBR.mp3' 
+  },
+  {
+    title: 'No One\'s Listening Show Ep.100',
+    author: 'Rat Radio',
+    file: 'http://localhost:4500/audio/rr_no_ones_listening_ep100_02_28_18.mp3',
+  },
+  {
+    title: 'No One\'s Listening Show Ep.101',
+    author: 'Rat Radio',
+    file: 'http://localhost:4500/audio/rr_no_ones_listening_ep101_03_07_18.mp3' 
+  },
+  {
+    title: 'No One\'s Listening Show Ep.102',
+    author: 'Rat Radio',
+    file: 'http://localhost:4500/audio/rr_no_ones_listening_ep102_03_14_18.mp3', 
+  },
+]
+
 const SKIP_BACK_ID = 'ap-skipback';
 const PREV_TRACK_ID  = 'ap-prev';
 const PLAY_PAUSE_ID  = 'ap-playpause';
@@ -18,9 +51,21 @@ const NEXT_TRACK_ID  = 'ap-next';
 const SKIP_FORWARD_ID  = 'ap-skipforward';
 
 class AudioPlayer {
-  constructor() {
+  constructor(tracks) {
+    //Track List
+    this.trackList = tracks;
+    this.trackCount = tracks.length;
+    console.log(this.trackCount);
+
+    //Current Track
+    this.currentTrack = Number( localStorage.getItem('apTrack') ) || 0;
+
     //Audio element
     this.audio = document.createElement('audio');
+
+    //Title Elements
+    this.titleElements = document.getElementsByClassName('js-ap-title');
+    this.authorElements = document.getElementsByClassName('js-ap-author');
 
     //Buttons
     this.skipBackBtn = document.getElementById(SKIP_BACK_ID);
@@ -39,13 +84,6 @@ class AudioPlayer {
     this.timeDot = document.getElementById('ap-progress-bar-dot');
     this.progressBarWidth = this.progressBar.offsetWidth - this.timeDot.offsetWidth;
     this.onTimeDot = false;
-
-    //Total Tracks
-    this.trackCount = AUDIO_FILES.length;
-    console.log(this.trackCount);
-
-    //Current Track
-    this.currentTrack = Number( localStorage.getItem('apTrack') ) || 0;
     
   }
 
@@ -94,7 +132,7 @@ class AudioPlayer {
   timeUpdate = () => {
     console.log('current-time: ' + this.audio.currentTime);
     console.log('calculation time %: ' + (this.audio.currentTime / this.duration) );
-    this.timeTextCurrent.innerText = this.formatTime(this.audio.currentTime);
+    this.timeTextCurrent.innerHTML = this.formatTime(this.audio.currentTime);
 
     const timePercent = this.progressBarWidth * (this.audio.currentTime / this.duration);
 
@@ -145,15 +183,30 @@ class AudioPlayer {
     }
   }
 
-  loadTrack = (file) => {
-    console.log(file);
-    this.audio.src = file;
+  loadTrack = (track) => {
+    console.log(track.file);
+    this.audio.src = track.file;
+    
+    for (let i = 0; i < this.titleElements.length; i++) {
+      this.titleElements[i].innerHTML = track.title || 'Untitled';
+    }
+
+    for (let i = 0; i < this.authorElements.length; i++) {
+      this.authorElements[i].innerHTML = track.author || 'Unknown Author';
+    }
+
+    // this.titleElements.forEach( (item) => {
+    //   item.innerText = track.title;
+    // });
+    // this.authorElements.forEach( (item) => {
+    //   item.innerText = author.title;
+    // });
   }
 
   playPauseTrack = () => {
     if (this.audio.paused) {
       this.audio.play();
-      this.timeTextDuration.innerText = this.formatTime(this.duration);
+      this.timeTextDuration.innerHTML = this.formatTime(this.duration);
     } else {
       this.audio.pause();
     }
@@ -172,7 +225,7 @@ class AudioPlayer {
 
     this.currentTrack = this.currentTrack + 1;
     this.setTrack();
-    this.loadTrack(AUDIO_FILES[this.currentTrack]);
+    this.loadTrack(this.trackList[this.currentTrack]);
     this.playPauseTrack();
   }
 
@@ -186,7 +239,7 @@ class AudioPlayer {
 
     this.currentTrack = this.currentTrack - 1;
     this.setTrack();
-    this.loadTrack(AUDIO_FILES[this.currentTrack]);
+    this.loadTrack(this.trackList[this.currentTrack]);
     this.playPauseTrack();
   }
 
@@ -212,11 +265,11 @@ class AudioPlayer {
   }
 
   init() {
-    this.loadTrack(AUDIO_FILES[this.currentTrack]);
+    this.loadTrack(this.trackList[this.currentTrack]);
     this.addListeners();
   };
 
 }
 
-const player = new AudioPlayer;
+const player = new AudioPlayer(SONGS);
 player.init();

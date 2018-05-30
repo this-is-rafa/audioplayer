@@ -138,8 +138,8 @@
 
   <div class="ap" id="AudioPlayer">
     <div class="ap-top">
-      <h5 class="ap-top__title" id="ap-title">This is the title</h5>
-      <h6 class="ap-top__author" id="ap-author">Author</h6>
+      <h5 class="ap-top__title js-ap-title" id="ap-top-title">This is the title</h5>
+      <h6 class="ap-top__author js-ap-author" id="ap-top-author">Author</h6>
     </div>
 
     <div class="ap-progress-bar" id="ap-progress-bar">
@@ -150,12 +150,10 @@
     <div class="ap-controls-container">
 
       <div class="ap-controls-container__left">
-
-      </div>
-
-      <div class="ap-time">
-        <div class="ap-time__text ap-time__text--current" id="ap-time-current">00:00</div>
-        <div class="ap-time__text ap-time__text--duration" id="ap-time-duration">00:00</div>
+        <div class="ap-bottom-titles">
+          <div class="ap-bottom-titles__title js-ap-title" id="ap-bottom-title"></div>
+          <div class="ap-bottom-titles__author js-ap-author" id="ap-bottom-author"></div>
+        </div>
       </div>
 
       <div class="ap-controls-container__middle">
@@ -189,7 +187,10 @@
       </div>
 
       <div class="ap-controls-container__right">
-
+        <div class="ap-time">
+          <div class="ap-time__text ap-time__text--current" id="ap-time-current">00:00</div>
+          <div class="ap-time__text ap-time__text--duration" id="ap-time-duration">00:00</div>
+        </div>
       </div>
 
     </div>
