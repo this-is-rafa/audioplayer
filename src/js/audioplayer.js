@@ -54,14 +54,27 @@ const PLAY_ICON_ID = 'ap-playicon';
 
 
 class AudioPlayer {
-  constructor(tracks) {
+  constructor(tracks, userOptions) {
+    //Options
+    let defaults = {
+      autoPlayNextTrack: true,
+      rememberTrackSession: false,
+      showNextButton: true,
+      showPrevButton: true,
+      showSkipForward: true,
+      showSkipBack: true 
+    }
+
+    this.options = Object.assign({}, defaults, userOptions);
+
+
     //Track List
     this.trackList = tracks;
     this.trackCount = tracks.length;
     console.log(this.trackCount);
 
     //Current Track
-    this.currentTrack = Number( localStorage.getItem('apTrack') ) || 0;
+    this.currentTrack = this.options.rememberTrackSession ? Number( localStorage.getItem('apTrack') ) : 0;
 
     //Audio element
     this.audio = document.createElement('audio');
@@ -76,6 +89,20 @@ class AudioPlayer {
     this.playPauseBtn = document.getElementById(PLAY_PAUSE_ID);
     this.nextTrackBtn = document.getElementById(NEXT_TRACK_ID);
     this.skipForwardBtn = document.getElementById(SKIP_FORWARD_ID);
+
+    //Hide Buttons according to options
+    if (!this.options.showNextButton) {
+      this.nextTrackBtn.classList.add('ap-controls__btn--hide');
+    }
+    if (!this.options.showPrevButton) {
+      this.prevTrackBtn.classList.add('ap-controls__btn--hide');
+    }
+    if (!this.options.showSkipBack) {
+      this.skipBackBtn.classList.add('ap-controls__btn--hide');
+    }
+    if (!this.options.showSkipForward) {
+      this.skipForwardBtn.classList.add('ap-controls__btn--hide');
+    }
 
     //Icons
     this.pauseIcon = document.getElementById(PAUSE_ICON_ID);
@@ -110,7 +137,7 @@ class AudioPlayer {
 
     this.audio.addEventListener('durationchange', () => this.duration = this.audio.duration, false);
     this.audio.addEventListener('timeupdate', this.timeUpdate, false);
-    this.audio.addEventListener('ended', this.nextTrack);
+    this.audio.addEventListener('ended', this.options.autoPlayNextTrack ? this.nextTrack : this.stopTrack);
 
     this.volumeBar.addEventListener('change', this.setVolume, false);
 
@@ -217,6 +244,12 @@ class AudioPlayer {
     }
   }
 
+  stopTrack = () => {
+    this.audio.currentTime = 0;
+    this.pauseIcon.classList.remove('ap-icon--show');
+    this.playIcon.classList.add('ap-icon--show');
+  }
+
   playPauseTrack = () => {
     if (this.audio.paused) {
       this.audio.play();
@@ -284,5 +317,11 @@ class AudioPlayer {
 
 }
 
-const player = new AudioPlayer(SONGS);
+const player = new AudioPlayer(SONGS, {
+  autoPlayNextTrack: false,
+  showNextButton: false,
+  showPrevButton: false,
+  showSkipForward: true,
+  showSkipBack: true 
+});
 player.init();
