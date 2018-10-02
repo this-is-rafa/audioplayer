@@ -259,7 +259,7 @@ h1,h2,h3,h4,h5,h6 {
   }
 
   &--pause {
-    //display: none;
+    display: none;
     fill: $white;
     height: 30px;
     margin-top: 3px;
@@ -273,6 +273,10 @@ h1,h2,h3,h4,h5,h6 {
     margin-left: 5px;
     margin-top: 3px;
     width: 30px;
+  }
+
+  &--show {
+    display: inline;
   }
 }
 

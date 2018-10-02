@@ -49,6 +49,9 @@ const PREV_TRACK_ID  = 'ap-prev';
 const PLAY_PAUSE_ID  = 'ap-playpause';
 const NEXT_TRACK_ID  = 'ap-next';
 const SKIP_FORWARD_ID  = 'ap-skipforward';
+const PAUSE_ICON_ID = 'ap-pauseicon';
+const PLAY_ICON_ID = 'ap-playicon';
+
 
 class AudioPlayer {
   constructor(tracks) {
@@ -73,6 +76,10 @@ class AudioPlayer {
     this.playPauseBtn = document.getElementById(PLAY_PAUSE_ID);
     this.nextTrackBtn = document.getElementById(NEXT_TRACK_ID);
     this.skipForwardBtn = document.getElementById(SKIP_FORWARD_ID);
+
+    //Icons
+    this.pauseIcon = document.getElementById(PAUSE_ICON_ID);
+    this.playIcon = document.getElementById(PLAY_ICON_ID);
 
     //Volume
     this.volumeBar = document.getElementById('ap-volume');
@@ -213,8 +220,12 @@ class AudioPlayer {
   playPauseTrack = () => {
     if (this.audio.paused) {
       this.audio.play();
+      this.pauseIcon.classList.add('ap-icon--show');
+      this.playIcon.classList.remove('ap-icon--show');
     } else {
       this.audio.pause();
+      this.pauseIcon.classList.remove('ap-icon--show');
+      this.playIcon.classList.add('ap-icon--show');
     }
     this.timeTextDuration.innerHTML = this.formatTime(this.duration);
   };
