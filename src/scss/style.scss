@@ -258,7 +258,16 @@ h1,h2,h3,h4,h5,h6 {
     transform: rotate(180deg);
   }
 
+  &--pause {
+    //display: none;
+    fill: $white;
+    height: 30px;
+    margin-top: 3px;
+    width: 30px;
+  }
+
   &--play {
+    display: none;
     fill: $white;
     height: 30px;
     margin-left: 5px;
