@@ -43,6 +43,8 @@ h1,h2,h3,h4,h5,h6 {
   padding: 1rem;
   position: fixed;
   top: 0;
+  transform: translateY(-100%);
+  transition: .3s ease transform;
   width: 100%;
   z-index: z('audio-player');
 
@@ -59,14 +61,24 @@ h1,h2,h3,h4,h5,h6 {
     font-weight: normal;
     margin: 0;
   }
+
+  &--show {
+    transform: none;
+  }
 }
 
 .ap-bottom {
   background-color: $white;
   bottom: 0;
   position: fixed;
+  transform: translateY(105%);
+  transition: .3s ease transform;
   width: 100%;
   z-index: z('audio-player');
+
+    &--show {
+      transform: none;
+    }
 }
 
 .ap-progress-bar {

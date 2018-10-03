@@ -78,6 +78,10 @@ class AudioPlayer {
     //Audio element
     this.audio = document.createElement('audio');
 
+    //Container Elements
+    this.containerBottom = document.getElementById('ap-bottom');
+    this.containerTop = document.getElementById('ap-top');
+
     //Title Elements
     this.titleElements = document.getElementsByClassName('js-ap-title');
     this.authorElements = document.getElementsByClassName('js-ap-author');
@@ -314,6 +318,8 @@ class AudioPlayer {
   init() {
     this.loadTrack(this.trackList[this.currentTrack]);
     this.addListeners();
+    this.containerBottom.classList.add('ap-bottom--show');
+    this.containerTop.classList.add('ap-top--show');
   };
 
 }
