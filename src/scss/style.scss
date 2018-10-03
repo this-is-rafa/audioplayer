@@ -12,7 +12,7 @@ $breakpoints: (
 
 $z-index: (
   "audio-player": 10,
-  "ap-progress-bar__dot": 15
+  "ap-progress-bar": 15
 );
 
 $text-color: #333;
@@ -36,7 +36,9 @@ h1,h2,h3,h4,h5,h6 {
   margin: 0 0 1rem;
 }
 
+
 .ap-top {
+  background-color: $white;
   border-bottom: 1px solid $accent;
   padding: 1rem;
   position: fixed;
@@ -59,12 +61,19 @@ h1,h2,h3,h4,h5,h6 {
   }
 }
 
-.ap-progress-bar {
-  background-color: $accent;
-  bottom: 70px;
-  height: 4px;
+.ap-bottom {
+  background-color: $white;
+  bottom: 0;
   position: fixed;
   width: 100%;
+  z-index: z('audio-player');
+}
+
+.ap-progress-bar {
+  background-color: $accent;
+  height: 4px;
+  width: 100%;
+  z-index: z('ap-progress-bar');
 
   &__dot {
     background-color: $primary;
@@ -77,7 +86,6 @@ h1,h2,h3,h4,h5,h6 {
     top: -4px;
     transition: ease .3s transform, ease .3s top, ease .3s opacity;
     width: 12px;
-    z-index: z('ap-progress-bar__dot');
 
     &:focus, &:active {
       opacity: .7;
@@ -96,9 +104,7 @@ h1,h2,h3,h4,h5,h6 {
 
 .ap-controls-container {
   bottom: 0;
-  position: fixed;
   width: 100%;
-  z-index: z('audio-player');
 
   @include mq('tablet') {
     display: flex;
@@ -321,4 +327,9 @@ $volume-dot-d: .8rem;
   @include mq('tablet') {
     display: block;
   }
+}
+
+.mp3-link {
+  display: block;
+  margin-top: 100px;
 }

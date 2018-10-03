@@ -64,70 +64,75 @@
     </symbol>
   </svg>
 
-  <div class="ap" id="AudioPlayer">
+  <div id="AudioPlayer">
     <div class="ap-top">
       <h5 class="ap-top__title js-ap-title" id="ap-top-title">This is the title</h5>
       <h6 class="ap-top__author js-ap-author" id="ap-top-author">Author</h6>
     </div>
 
-    <div class="ap-progress-bar" id="ap-progress-bar">
-      <button class="ap-progress-bar__dot" id="ap-progress-bar-dot">
-      </button>
-      <div class="ap-progress-bar__color" id="ap-progress-bar-color"></div>
-    </div>
+    <div class="ap-bottom">
 
-    <div class="ap-controls-container">
-
-      <div class="ap-controls-container__left">
-        <div class="ap-bottom-titles">
-          <div class="ap-bottom-titles__title js-ap-title" id="ap-bottom-title"></div>
-          <div class="ap-bottom-titles__author js-ap-author" id="ap-bottom-author"></div>
-        </div>
+      <div class="ap-progress-bar" id="ap-progress-bar">
+        <button class="ap-progress-bar__dot" id="ap-progress-bar-dot">
+        </button>
+        <div class="ap-progress-bar__color" id="ap-progress-bar-color"></div>
       </div>
 
-      <div class="ap-controls-container__middle">
-        <div class="ap-controls">
-          <button type="button" class="ap-controls__btn ap-controls__btn--skip-back" id="ap-skipback">
-            <svg class="ap-icon ap-icon--skip30">
-              <use xlink:href="#skip10"></use>
-            </svg>
-          </button>
-          <button type="button" class="ap-controls__btn ap-controls__btn--prev" id="ap-prev">
-            <svg class="ap-icon ap-icon--advance-prev">
-              <use xlink:href="#advance"></use>
-            </svg>
-          </button>
-          <button type="button" class="ap-controls__btn ap-controls__btn--playpause" id="ap-playpause">
-            <svg class="ap-icon ap-icon--play ap-icon--show" id="ap-playicon">
-              <use xlink:href="#play"></use>
-            </svg>
-            <svg class="ap-icon ap-icon--pause" id="ap-pauseicon">
-              <use xlink:href="#pause"></use>
-            </svg>
-          </button>
-          <button type="button" class="ap-controls__btn ap-controls__btn--next" id="ap-next">
-            <svg class="ap-icon ap-icon--advance-next">
-              <use xlink:href="#advance"></use>
-            </svg>
-          </button>
-          <button type="button" class="ap-controls__btn ap-controls__btn--skip-forward" id="ap-skipforward">
-            <svg class="ap-icon ap-icon--skip30">
-              <use xlink:href="#skip30"></use>
-            </svg>
-          </button>
-        </div>
-      </div>
+      <div class="ap-controls-container">
 
-      <div class="ap-controls-container__right">
-        <div class="ap-time">
-          <div class="ap-time__text ap-time__text--current" id="ap-time-current">00:00</div>
-          <div class="ap-time__text ap-time__text--duration" id="ap-time-duration">00:00</div>
+        <div class="ap-controls-container__left">
+          <div class="ap-bottom-titles">
+            <div class="ap-bottom-titles__title js-ap-title" id="ap-bottom-title"></div>
+            <div class="ap-bottom-titles__author js-ap-author" id="ap-bottom-author"></div>
+          </div>
         </div>
-        <input id="ap-volume" class="ap-volume" type="range">
-      </div>
 
-    </div>
-  </div>
+        <div class="ap-controls-container__middle">
+          <div class="ap-controls">
+            <button type="button" class="ap-controls__btn ap-controls__btn--skip-back" id="ap-skipback">
+              <svg class="ap-icon ap-icon--skip30">
+                <use xlink:href="#skip10"></use>
+              </svg>
+            </button>
+            <button type="button" class="ap-controls__btn ap-controls__btn--prev" id="ap-prev">
+              <svg class="ap-icon ap-icon--advance-prev">
+                <use xlink:href="#advance"></use>
+              </svg>
+            </button>
+            <button type="button" class="ap-controls__btn ap-controls__btn--playpause" id="ap-playpause">
+              <svg class="ap-icon ap-icon--play ap-icon--show" id="ap-playicon">
+                <use xlink:href="#play"></use>
+              </svg>
+              <svg class="ap-icon ap-icon--pause" id="ap-pauseicon">
+                <use xlink:href="#pause"></use>
+              </svg>
+            </button>
+            <button type="button" class="ap-controls__btn ap-controls__btn--next" id="ap-next">
+              <svg class="ap-icon ap-icon--advance-next">
+                <use xlink:href="#advance"></use>
+              </svg>
+            </button>
+            <button type="button" class="ap-controls__btn ap-controls__btn--skip-forward" id="ap-skipforward">
+              <svg class="ap-icon ap-icon--skip30">
+                <use xlink:href="#skip30"></use>
+              </svg>
+            </button>
+          </div>
+        </div>
+
+        <div class="ap-controls-container__right">
+          <div class="ap-time">
+            <div class="ap-time__text ap-time__text--current" id="ap-time-current">00:00</div>
+            <div class="ap-time__text ap-time__text--duration" id="ap-time-duration">00:00</div>
+          </div>
+          <input id="ap-volume" class="ap-volume" type="range">
+        </div>
+
+      </div><!-- ap-controls-container -->
+    </div><!-- ap-bottom -->
+  </div><!-- AudioPlayer -->
+
+  <a class="mp3-link" href="http://localhost:4500/audio/long-vbr.ogg" data-title="No One's Listening Show Ep. Ogg" data-author="Rat Radio">MP3 Link</a>
 
   <script type="text/javascript" src="js/jsmediatags.min.js"></script>
   <script type="text/javascript" src="js/audioplayer.js"></script>
