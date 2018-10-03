@@ -130,7 +130,9 @@ class AudioPlayer {
     this.onTimeDot = false;
     
     //Initialize
-    this.init();
+    this.playerInitialized = false;
+    //this.init(this.trackList[this.currentTrack]);
+    this.loadTrackLinks();
   }
 
   addListeners = () => {
@@ -315,11 +317,35 @@ class AudioPlayer {
     localStorage.setItem('apVolume', this.volumeBar.value);
   }
 
-  init() {
-    this.loadTrack(this.trackList[this.currentTrack]);
-    this.addListeners();
-    this.containerBottom.classList.add('ap-bottom--show');
-    this.containerTop.classList.add('ap-top--show');
+  loadTrackLinks = () => {
+    let audioLinks = document.getElementsByClassName('ap-audio-file');
+    if (audioLinks && audioLinks.length > 0) {
+      for (let item of audioLinks) {
+        item.addEventListener('click', this.playFromLink.bind(this));
+      }
+    }
+  }
+
+  playFromLink = (e) => {
+    e.preventDefault();
+    let track = {
+      title: e.target.dataset.title || 'Untitled',
+      author: e.target.dataset.author || 'Unknown',
+      file: e.target.href || null
+    }
+
+    this.init(track);
+    this.playPauseTrack();
+  };
+
+  init = (track) => {
+    this.loadTrack(track);
+    if (!this.playerInitialize) {
+      this.addListeners();
+      this.containerBottom.classList.add('ap-bottom--show');
+      this.containerTop.classList.add('ap-top--show');
+      this.playerInitialize = true;
+    }
   };
 
 }

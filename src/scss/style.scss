@@ -55,11 +55,15 @@ h1,h2,h3,h4,h5,h6 {
   &__title {
     font-weight: normal;
     margin: 0;
+    text-overflow: ellipsis;
+    white-space: nowrap;    
   }
 
   &__author {
     font-weight: normal;
     margin: 0;
+    text-overflow: ellipsis;
+    white-space: nowrap;
   }
 
   &--show {
@@ -192,10 +196,14 @@ h1,h2,h3,h4,h5,h6 {
   &__title {
     font-size: .9rem;
     font-weight: 600;
+    text-overflow: ellipsis;
+    white-space: nowrap;
   }
 
   &__author {
     font-size: .8rem;
+    text-overflow: ellipsis;
+    white-space: nowrap;
   }
 }
 
@@ -341,7 +349,7 @@ $volume-dot-d: .8rem;
   }
 }
 
-.mp3-link {
+.ap-audio-file {
   display: block;
   margin-top: 100px;
 }
