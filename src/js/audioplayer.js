@@ -67,7 +67,6 @@ class AudioPlayer {
 
     this.options = Object.assign({}, defaults, userOptions);
 
-
     //Track List
     this.trackList = tracks;
     this.trackCount = tracks.length;
@@ -126,6 +125,8 @@ class AudioPlayer {
     this.progressBarWidth = this.progressBar.offsetWidth - this.timeDot.offsetWidth;
     this.onTimeDot = false;
     
+    //Initialize
+    this.init();
   }
 
   addListeners = () => {
@@ -324,4 +325,3 @@ const player = new AudioPlayer(SONGS, {
   showSkipForward: true,
   showSkipBack: true 
 });
-player.init();
