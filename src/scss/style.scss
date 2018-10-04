@@ -92,18 +92,30 @@ h1,h2,h3,h4,h5,h6 {
   z-index: z('ap-progress-bar');
 
   &__dot {
-    background-color: $primary;
+    background-color: transparent;
     border: 0;
-    border-radius: 50%;
+    border-radius: 0;
     cursor: pointer;
-    height: 12px;
+    height: 34px;
     padding: 0;
     position: absolute;
-    top: -4px;
+    top: -15px;
     transition: ease .3s transform, ease .3s top, ease .3s opacity;
     width: 12px;
 
-    &:focus, &:active {
+    &::after {
+      background-color: $primary;
+      border: 0;
+      border-radius: 50%;
+      content: '';
+      cursor: pointer;
+      display: block;
+      height: 12px;
+      padding: 0;
+      width: 12px;
+    }
+
+    &:focus::after, &:active::after {
       opacity: .7;
       top: -18px;
       transform: scale(3);
@@ -227,15 +239,17 @@ h1,h2,h3,h4,h5,h6 {
 
     &:active {
       background-color: $accent;
-    }
-
-    &:focus {
       outline: none;
     }
 
     &::moz-focus-inner {
       border: 0;
       outline: 0;
+    }
+
+    &:focus {
+      border: 0;
+      outline: none;
     }
 
 
