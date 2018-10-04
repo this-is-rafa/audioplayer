@@ -149,9 +149,9 @@ class AudioPlayer {
     this.volumeBar.addEventListener('change', this.setVolume, false);
 
     this.timeDot.addEventListener('mousedown', this.mouseDown, false);
-    this.timeDot.addEventListener('touchstart', this.mouseDown, false);
     window.addEventListener('mouseup', this.mouseUp, false);
-    window.addEventListener('touchend', this.mouseUp, false);
+    this.timeDot.addEventListener('touchstart', this.mouseDown, false);
+    this.timeDot.addEventListener('touchend', this.mouseUp, false);
   }
 
   formatTime = (secs) => {
@@ -191,13 +191,11 @@ class AudioPlayer {
     this.timeColor.style.width = timePercent + 'px';
   }
 
-  
-
   mouseDown = () => {
     console.log('mouseDown');
     this.onTimeDot = true;
     window.addEventListener('mousemove', this.dragDot, true);
-    window.addEventListener('touchmove', this.dragDot, true);
+    this.timeDot.addEventListener('touchmove', this.dragDot, true);
     this.audio.removeEventListener('timeupdate', this.timeUpdate, false);
   }
 
@@ -205,9 +203,11 @@ class AudioPlayer {
     if (this.onTimeDot) {
       this.dragDot(ev);
       window.removeEventListener('mousemove', this.dragDot, true);
-      window.removeEventListener('touchmove', this.dragDot, true);
-      this.audio.currentTime = this.duration * (ev.clientX / this.progressBarWidth);
-      console.log('mouseUp duration * %: ' + (this.duration * (ev.clientX / this.progressBarWidth)) )
+      this.timeDot.removeEventListener('touchmove', this.dragDot, true);
+
+      let timeChange = ev.touches ? parseInt(ev.changedTouches[0].clientX) : ev.clientX;
+      this.audio.currentTime = this.duration * (timeChange / this.progressBarWidth);
+      console.log('mouseUp duration * %: ' + (this.duration * (ev.clientX / this.progressBarWidth)) );
       console.log('mouseUp currentTime: ' + this.audio.currentTime );
       this.audio.addEventListener('timeupdate', this.timeUpdate, false);
     }
@@ -219,7 +219,7 @@ class AudioPlayer {
     let leftPosition = ev.clientX;
 
     if (ev.touches) {
-      leftPosition = ev.changedTouches[0].clientX;
+      leftPosition = parseInt(ev.changedTouches[0].clientX);
     }
     
     console.log('pos: ' + leftPosition);
@@ -334,18 +334,18 @@ class AudioPlayer {
       file: e.target.href || null
     }
 
-    this.init(track);
+    //If we already called init, don't do it again.
+    this.playerInitialize ? this.loadTrack(track) : this.init(track);
+
     this.playPauseTrack();
   };
 
   init = (track) => {
     this.loadTrack(track);
-    if (!this.playerInitialize) {
-      this.addListeners();
-      this.containerBottom.classList.add('ap-bottom--show');
-      this.containerTop.classList.add('ap-top--show');
-      this.playerInitialize = true;
-    }
+    this.addListeners();
+    this.containerBottom.classList.add('ap-bottom--show');
+    this.containerTop.classList.add('ap-top--show');
+    this.playerInitialize = true;
   };
 
 }
