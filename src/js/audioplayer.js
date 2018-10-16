@@ -1,16 +1,5 @@
 'use strict';
 
-var jsmediatags = window.jsmediatags;
-
-const AUDIO_FILES = [
-  'http://localhost:4500/audio/long-vbr.ogg',
-  'http://localhost:4500/audio/seconds-CBR.mp3',
-  'http://localhost:4500/audio/seconds-VBR.mp3',
-  'http://localhost:4500/audio/rr_no_ones_listening_ep100_02_28_18.mp3',
-  'http://localhost:4500/audio/rr_no_ones_listening_ep101_03_07_18.mp3',
-  'http://localhost:4500/audio/rr_no_ones_listening_ep102_03_14_18.mp3',
-];
-
 const SONGS = [
   {
     title: 'Long VBR No One\'s Listening',
@@ -224,7 +213,7 @@ class AudioPlayer {
     
     console.log('pos: ' + leftPosition);
 
-    if (leftPosition >= 0 && leftPosition <= this.progressBarWidth) {
+    if (leftPosition >= 0 && leftPosition <= ( this.progressBarWidth + 25 ) ) {
       this.timeDot.style.left = leftPosition + 'px';
       this.timeColor.style.width = leftPosition + 'px';
     }
@@ -232,8 +221,8 @@ class AudioPlayer {
       this.timeDot.style.left = '0';
       this.timeColor.style.width = leftPosition + 'px';
     }
-    if (leftPosition > this.progressBarWidth) {
-      this.timeDot.style.left = this.progressBarWidth + 'px';
+    if ( leftPosition > ( this.progressBarWidth + 25 ) )  {
+      this.timeDot.style.left = ( this.progressBarWidth - 25 ) + 'px';
       this.timeColor.style.width = leftPosition + 'px';
     }
   }

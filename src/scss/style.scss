@@ -11,8 +11,9 @@ $breakpoints: (
 );
 
 $z-index: (
-  "audio-player": 10,
-  "ap-progress-bar": 15
+  "ap-progress-bar-dot": 20,
+  "ap-progress-bar": 15,
+  "audio-player": 10
 );
 
 $text-color: #333;
@@ -53,7 +54,7 @@ h1,h2,h3,h4,h5,h6 {
   }
 
   &__title {
-    font-weight: normal;
+    font-weight: 600;
     margin: 0;
     text-overflow: ellipsis;
     white-space: nowrap;    
@@ -101,7 +102,8 @@ h1,h2,h3,h4,h5,h6 {
     position: absolute;
     top: -15px;
     transition: ease .3s transform, ease .3s top, ease .3s opacity;
-    width: 12px;
+    width: 34px; 
+    z-index: z('ap-progress-bar-dot');
 
     &::after {
       background-color: $primary;
@@ -132,6 +134,7 @@ h1,h2,h3,h4,h5,h6 {
 
 .ap-controls-container {
   bottom: 0;
+  user-select: none;
   width: 100%;
 
   @include mq('tablet') {
@@ -179,6 +182,8 @@ h1,h2,h3,h4,h5,h6 {
   }
 
   &__text {
+    user-select: none;
+
     &--current {
       margin-right: .3rem;
 
@@ -245,6 +250,11 @@ h1,h2,h3,h4,h5,h6 {
     &::moz-focus-inner {
       border: 0;
       outline: 0;
+    }
+
+    &:-moz-focusring {
+      outline: 0;
+      border: 0;
     }
 
     &:focus {
