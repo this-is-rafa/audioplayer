@@ -59,7 +59,6 @@ class AudioPlayer {
     //Track List
     this.trackList = tracks;
     this.trackCount = tracks.length;
-    console.log(this.trackCount);
 
     //Current Track
     this.currentTrack = this.options.rememberTrackSession ? Number( localStorage.getItem('apTrack') ) : 0;
@@ -148,8 +147,6 @@ class AudioPlayer {
     let minute = Math.floor((secs - (hour * 3600)) / 60);
     let second = Math.floor(secs - (hour * 3600) - (minute * 60));
 
-    console.log(second);
-
     if (hour < 10) {
       hour = "0" + hour;
     }
@@ -170,8 +167,6 @@ class AudioPlayer {
   }
 
   timeUpdate = () => {
-    console.log('current-time: ' + this.audio.currentTime);
-    console.log('calculation time %: ' + (this.audio.currentTime / this.duration) );
     this.timeTextCurrent.innerHTML = this.formatTime(this.audio.currentTime);
 
     const timePercent = this.progressBarWidth * (this.audio.currentTime / this.duration);
@@ -181,7 +176,6 @@ class AudioPlayer {
   }
 
   mouseDown = () => {
-    console.log('mouseDown');
     this.onTimeDot = true;
     window.addEventListener('mousemove', this.dragDot, true);
     this.timeDot.addEventListener('touchmove', this.dragDot, true);
@@ -196,8 +190,7 @@ class AudioPlayer {
 
       let timeChange = ev.touches ? parseInt(ev.changedTouches[0].clientX) : ev.clientX;
       this.audio.currentTime = this.duration * (timeChange / this.progressBarWidth);
-      console.log('mouseUp duration * %: ' + (this.duration * (ev.clientX / this.progressBarWidth)) );
-      console.log('mouseUp currentTime: ' + this.audio.currentTime );
+
       this.audio.addEventListener('timeupdate', this.timeUpdate, false);
     }
     this.onTimeDot = false;
@@ -210,9 +203,6 @@ class AudioPlayer {
     if (ev.touches) {
       leftPosition = parseInt(ev.changedTouches[0].clientX);
     }
-    
-    console.log('pos: ' + leftPosition);
-
     if (leftPosition >= 0 && leftPosition <= ( this.progressBarWidth + 25 ) ) {
       this.timeDot.style.left = leftPosition + 'px';
       this.timeColor.style.width = leftPosition + 'px';
@@ -228,7 +218,6 @@ class AudioPlayer {
   }
 
   loadTrack = (track) => {
-    console.log(track.file);
     this.audio.src = track.file;
     
     for (let i = 0; i < this.titleElements.length; i++) {
@@ -293,12 +282,10 @@ class AudioPlayer {
 
   skipBack = () => {
     this.audio.currentTime = this.audio.currentTime - 10;
-    console.log(this.audio.currentTime);
   }
 
   skipForward = () => {
     this.audio.currentTime = this.audio.currentTime + 30;
-    console.log(this.audio.currentTime);
   }
 
   setVolume = () => {
