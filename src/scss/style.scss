@@ -18,6 +18,7 @@ $z-index: (
 
 $text-color: #333;
 $accent: #ccc;
+$gray: #808080;
 $primary: #0066cc;
 $white: #fff;
 
@@ -86,6 +87,24 @@ h1,h2,h3,h4,h5,h6 {
     }
 }
 
+.ap-thumbnail-container {
+  background-color: $accent;
+  fill: $text-color;
+  float: left;
+  height: 75px;
+  width: 75px;
+
+  &__img {
+    display: none;
+  }
+}
+
+.ap-instruments {
+  position: relative;
+  width: calc(100% - 75px);
+  float: right;
+}
+
 .ap-progress-bar {
   background-color: $accent;
   height: 4px;
@@ -117,10 +136,21 @@ h1,h2,h3,h4,h5,h6 {
       width: 12px;
     }
 
+    &:focus {
+      outline: 0;
+      border: 0;
+    }
+
     &:focus::after, &:active::after {
       opacity: .7;
       top: -18px;
       transform: scale(3);
+
+      @media (pointer: fine) {
+        opacity: 1;
+        top: auto;
+        transform: none;
+      }
     }
   }
 
@@ -297,6 +327,13 @@ h1,h2,h3,h4,h5,h6 {
   height: 20px;
   width: 20px;
   margin: 0;
+
+  &--musical-note {
+    fill: $gray;
+    height: 30px;
+    margin: 20px 0 0 22px;
+    width: 30px;
+  }
 
   &--skip10 {
     width: 30px;

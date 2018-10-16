@@ -60,6 +60,14 @@
         c8.271,0,15,6.729,15,15c0,8.271-6.729,15-15,15c-4.34,0-8.243-1.863-10.984-4.819l-2.744,2.932C14.73,41.733,19.596,44,25,44
         c10.493,0,19-8.506,19-19C44,14.507,35.493,6,25,6z"/>
     </symbol>
+
+    <symbol id="musical-note" viewBox="0 0 50 50">
+      <path d="M48,7.024l1-0.18L48,2.58V2h-0.136l-0.208-0.887L14.108,7.15L14.308,8H14v30.002c-1.306-0.577-2.844-0.916-4.497-0.916
+      C4.807,37.086,1,39.778,1,43.099c0,3.321,3.807,6.015,8.503,6.015s8.503-2.693,8.503-6.015c0-0.033-0.006-0.065-0.007-0.099H18
+      V12.423l27-4.859v26.813c-1.528-1.039-3.6-1.681-5.887-1.681c-4.697,0-8.504,2.692-8.504,6.014s3.807,6.014,8.504,6.014
+      c4.695,0,8.502-2.692,8.502-6.014c0-0.241-0.025-0.478-0.064-0.711H48V7.024z"/>
+    </symbol>
+
   </svg>
 
   <div id="AudioPlayer">
@@ -70,63 +78,73 @@
 
     <div class="ap-bottom" id="ap-bottom">
 
-      <div class="ap-progress-bar" id="ap-progress-bar">
-        <button class="ap-progress-bar__dot" id="ap-progress-bar-dot">
-        </button>
-        <div class="ap-progress-bar__color" id="ap-progress-bar-color"></div>
+      <div class="ap-thumbnail-container" id="ap-thumbnail-container">
+        <img src="" class="ap-thumbnail-container__img" alt="AudioPlayer Thumbnail" />
+        <svg class="ap-icon ap-icon--musical-note">
+          <use xlink:href="#musical-note"></use>
+        </svg>
       </div>
 
-      <div class="ap-controls-container">
+      <div class="ap-instruments" id="ap-instruments">
 
-        <div class="ap-controls-container__left">
-          <div class="ap-bottom-titles">
-            <div class="ap-bottom-titles__title js-ap-title" id="ap-bottom-title"></div>
-            <div class="ap-bottom-titles__author js-ap-author" id="ap-bottom-author"></div>
-          </div>
+        <div class="ap-progress-bar" id="ap-progress-bar">
+          <button class="ap-progress-bar__dot" id="ap-progress-bar-dot">
+          </button>
+          <div class="ap-progress-bar__color" id="ap-progress-bar-color"></div>
         </div>
 
-        <div class="ap-controls-container__middle">
-          <div class="ap-controls">
-            <button type="button" class="ap-controls__btn ap-controls__btn--skip-back" id="ap-skipback">
-              <svg class="ap-icon ap-icon--skip30">
-                <use xlink:href="#skip10"></use>
-              </svg>
-            </button>
-            <button type="button" class="ap-controls__btn ap-controls__btn--prev" id="ap-prev">
-              <svg class="ap-icon ap-icon--advance-prev">
-                <use xlink:href="#advance"></use>
-              </svg>
-            </button>
-            <button type="button" class="ap-controls__btn ap-controls__btn--playpause" id="ap-playpause">
-              <svg class="ap-icon ap-icon--play ap-icon--show" id="ap-playicon">
-                <use xlink:href="#play"></use>
-              </svg>
-              <svg class="ap-icon ap-icon--pause" id="ap-pauseicon">
-                <use xlink:href="#pause"></use>
-              </svg>
-            </button>
-            <button type="button" class="ap-controls__btn ap-controls__btn--next" id="ap-next">
-              <svg class="ap-icon ap-icon--advance-next">
-                <use xlink:href="#advance"></use>
-              </svg>
-            </button>
-            <button type="button" class="ap-controls__btn ap-controls__btn--skip-forward" id="ap-skipforward">
-              <svg class="ap-icon ap-icon--skip30">
-                <use xlink:href="#skip30"></use>
-              </svg>
-            </button>
-          </div>
-        </div>
+        <div class="ap-controls-container">
 
-        <div class="ap-controls-container__right">
-          <div class="ap-time">
-            <div class="ap-time__text ap-time__text--current" id="ap-time-current">00:00</div>
-            <div class="ap-time__text ap-time__text--duration" id="ap-time-duration">00:00</div>
+          <div class="ap-controls-container__left">
+            <div class="ap-bottom-titles">
+              <div class="ap-bottom-titles__title js-ap-title" id="ap-bottom-title"></div>
+              <div class="ap-bottom-titles__author js-ap-author" id="ap-bottom-author"></div>
+            </div>
           </div>
-          <input id="ap-volume" class="ap-volume" type="range">
-        </div>
 
-      </div><!-- ap-controls-container -->
+          <div class="ap-controls-container__middle">
+            <div class="ap-controls">
+              <button type="button" class="ap-controls__btn ap-controls__btn--skip-back" id="ap-skipback">
+                <svg class="ap-icon ap-icon--skip10">
+                  <use xlink:href="#skip10"></use>
+                </svg>
+              </button>
+              <button type="button" class="ap-controls__btn ap-controls__btn--prev" id="ap-prev">
+                <svg class="ap-icon ap-icon--advance-prev">
+                  <use xlink:href="#advance"></use>
+                </svg>
+              </button>
+              <button type="button" class="ap-controls__btn ap-controls__btn--playpause" id="ap-playpause">
+                <svg class="ap-icon ap-icon--play ap-icon--show" id="ap-playicon">
+                  <use xlink:href="#play"></use>
+                </svg>
+                <svg class="ap-icon ap-icon--pause" id="ap-pauseicon">
+                  <use xlink:href="#pause"></use>
+                </svg>
+              </button>
+              <button type="button" class="ap-controls__btn ap-controls__btn--next" id="ap-next">
+                <svg class="ap-icon ap-icon--advance-next">
+                  <use xlink:href="#advance"></use>
+                </svg>
+              </button>
+              <button type="button" class="ap-controls__btn ap-controls__btn--skip-forward" id="ap-skipforward">
+                <svg class="ap-icon ap-icon--skip30">
+                  <use xlink:href="#skip30"></use>
+                </svg>
+              </button>
+            </div>
+          </div>
+
+          <div class="ap-controls-container__right">
+            <div class="ap-time">
+              <div class="ap-time__text ap-time__text--current" id="ap-time-current">00:00</div>
+              <div class="ap-time__text ap-time__text--duration" id="ap-time-duration">00:00</div>
+            </div>
+            <input id="ap-volume" class="ap-volume" type="range">
+          </div>
+
+        </div><!-- ap-controls-container -->
+      </div><!-- ap-all-instruments -->
     </div><!-- ap-bottom -->
   </div><!-- AudioPlayer -->
 

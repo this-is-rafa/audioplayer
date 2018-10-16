@@ -189,7 +189,7 @@ class AudioPlayer {
       this.timeDot.removeEventListener('touchmove', this.dragDot, true);
 
       let timeChange = ev.touches ? parseInt(ev.changedTouches[0].clientX) : ev.clientX;
-      this.audio.currentTime = this.duration * (timeChange / this.progressBarWidth);
+      this.audio.currentTime = this.duration * ( ( timeChange - 75 ) / this.progressBarWidth);
 
       this.audio.addEventListener('timeupdate', this.timeUpdate, false);
     }
@@ -198,10 +198,10 @@ class AudioPlayer {
 
   dragDot = (ev) => {
     
-    let leftPosition = ev.clientX;
+    let leftPosition = ev.clientX - 75;
 
     if (ev.touches) {
-      leftPosition = parseInt(ev.changedTouches[0].clientX);
+      leftPosition = ( parseInt(ev.changedTouches[0].clientX) - 75 );
     }
     if (leftPosition >= 0 && leftPosition <= ( this.progressBarWidth + 25 ) ) {
       this.timeDot.style.left = leftPosition + 'px';
